@@ -10,18 +10,18 @@ function NavBar(props) {
       {props.isLogin ? (
         <ul>
           <LeftLi>
-            <StyledLink to="/postlist">Recipe</StyledLink>
+            <StyledLink to="/posts">Recipe</StyledLink>
           </LeftLi>
           <Profile>(아이디)</Profile>
         </ul>
       ) : (
         <ul>
           <LeftLi>
-            <StyledLink to="/postlist">Recipe</StyledLink>
+            <StyledLink to="/posts">Recipe List</StyledLink>
           </LeftLi>
           <RightLi>
-            <StyledLink to="/Login">Login</StyledLink>
-            <StyledLink to="/Join">Join</StyledLink>
+            <StyledLink to="/login">Login</StyledLink>
+            <StyledLink to="/signup">Sign Up</StyledLink>
           </RightLi>
         </ul>
       )}
@@ -50,6 +50,7 @@ const NavWrapper = styled.nav`
     display: flex;
     justify-content: space-between;
   }
+  border-radius: 10px;
 `;
 
 // 스타일된 링크
@@ -60,6 +61,7 @@ const StyledLink = styled(Link)`
 
 // 왼쪽 목록 스타일
 const LeftLi = styled.li`
+  font-size: 18px;
   margin-left: 20px;
 `;
 

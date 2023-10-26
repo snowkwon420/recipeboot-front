@@ -1,6 +1,4 @@
-import React, { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "./pages/MainPage/Main";
+import Main from "./pages/main/Main";
 import GlobalStyle from "./style/GlobalStyle";
 
 function App() {

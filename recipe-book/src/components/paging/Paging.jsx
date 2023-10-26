@@ -1,4 +1,3 @@
-import React from "react";
 import "../paging/PagingStyle.css";
 import Pagination from "react-js-pagination";
 
