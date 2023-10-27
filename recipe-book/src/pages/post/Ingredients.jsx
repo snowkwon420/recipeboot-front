@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 import axios from "axios";
 
-function Postingredients() {
+function Ingredients() {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
