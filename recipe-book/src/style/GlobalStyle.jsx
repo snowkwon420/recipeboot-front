@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .navbar-brand {
-    font-family: "yg-jalnan"; // 네비게이션 바 폰트 설정
+    font-family: "IBMPlexSansKR"; // 네비게이션 바 폰트 설정
     color: #ff973c;
     font-size: 24px; // 네비게이션 바 스타일
   }

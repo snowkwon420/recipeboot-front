@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as ProfileIcon } from "../../assets/img/icon-user.svg";
 
 // NavBar 컴포넌트
 function NavBar(props) {
@@ -20,8 +19,8 @@ function NavBar(props) {
             <StyledLink to="/posts">Recipe List</StyledLink>
           </LeftLi>
           <RightLi>
-            <StyledLink to="/login">Login</StyledLink>
-            <StyledLink to="/signup">Sign Up</StyledLink>
+            <StyledLink to="/login">Log in</StyledLink>
+            <StyledLink to="/signup">Join</StyledLink>
           </RightLi>
         </ul>
       )}
@@ -42,7 +41,7 @@ const NavWrapper = styled.nav`
   height: 36px;
   background-color: var(--main-color);
   font-size: 24px;
-  font-family: "yg-jalnan";
+  font-family: "IBMPlexSansKR";
   padding: 8px 0px;
   line-height: 36px;
   ul {
@@ -70,7 +69,7 @@ const RightLi = styled.li`
   font-size: 18px;
   margin-right: 20px;
   display: flex;
-  gap: 30px;
+  gap: 20px;
 `;
 
 export default NavBar;
