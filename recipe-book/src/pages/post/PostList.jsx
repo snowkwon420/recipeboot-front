@@ -46,7 +46,7 @@ function PostList() {
         />
         <InputContainer>
           {/* 검색 입력 필드 */}
-          <Input width="250px" />
+          <Input width="200px" />
           {/* 검색 아이콘 */}
           <SearchIcon
             style={{ position: "absolute", right: "0px", top: "25px" }}
