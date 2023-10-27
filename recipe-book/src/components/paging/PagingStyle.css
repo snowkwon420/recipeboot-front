@@ -47,7 +47,7 @@ ul.pagination li.active a {
 
 /* 활성화된 페이지 목록 항목 스타일 */
 ul.pagination li.active {
-  background-color: orange;
+  background-color: rgb(255, 98, 0);
 }
 
 /* 링크 호버 및 활성 링크 스타일 */
