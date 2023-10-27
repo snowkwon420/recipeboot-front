@@ -12,10 +12,10 @@ const footerContainerStyle = {
   padding: "20px 0 3px",
   marginTop: "3rem",
   width: "100%",
-  fontSize: "0.5em",
+  fontSize: "0.8em",
   textAlign: "center",
   fontStyle: "normal",
-  color: "#ff7028",
+  color: "#000000",
   clear: "both",
   minWidth: "1000px",
 };
@@ -24,8 +24,8 @@ const footerContainerStyle = {
 const footerLogoStyle = {
   display: "inline-block",
   textDecoration: "none",
-  color: "#ff7028",
-  fontSize: "2.5em",
+  color: "#000000",
+  fontSize: "2em",
   paddingTop: "15px",
   textAlign: "center",
   fontFamily: "yg-jalnan",
