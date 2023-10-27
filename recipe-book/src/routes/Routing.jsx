@@ -4,7 +4,7 @@ import Signup from "../pages/auth/signup/Signup";
 import Postform from "../pages/post/Postform";
 import Postingredients from "../pages/post/Postingredients";
 import PostList from "../pages/post/PostList";
-import Post from '../pages/post/Post';
+import Post from "../pages/post/Post";
 
 function Routing() {
   return (
@@ -13,7 +13,7 @@ function Routing() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/posts/forms" element={<Postform />} />
-      <Route path="/postingredients" element={<Postingredients />} />
+      <Route path="/posts/forms/ingredients" element={<Postingredients />} />
       <Route path="/login" element={<Login />} />
       <Route path="/posts" element={<PostList />} />
       <Route path="/posts/:id" element={<Post />} />
