@@ -12,7 +12,7 @@ function Routing() {
       <Route path="/login" element={<Login />} />
       {/* 라우팅 추가 */}
       <Route path="/posts/:id" element={<Post />} />
-
+ 
     </Routes>
   );
 }
