@@ -15,8 +15,8 @@
 }
 
 @font-face {
-  font-family: "IBMPlexSansKR-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20px 7px @1 0 /IBMPlexSansKR-SemiBold;.woff")
+  font-family: 'IBM Plex Sans', sans-serif;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20px 7px @1 0 /IBMPlexSansKR-Bold;.woff")
     format("woff");
   font-weight: 600;
   font-style: normal;

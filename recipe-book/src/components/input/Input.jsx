@@ -1,4 +1,3 @@
-import React from "react";
 import { styled } from "styled-components";
 import { ReactComponent as UserIdIcon } from "../../assets/img/icon-userID.svg";
 import { ReactComponent as UserPwIcon } from "../../assets/img/icon-userPwIcon.svg";

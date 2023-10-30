@@ -1,69 +1,133 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './index.css';
+import React, { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { styled } from 'styled-components';
+import Input from '../../../components/input/Input';
+import Button from '../../../components/button/Button';
+import { Link, useNavigate } from 'react-router-dom';
+import { LayoutWrapper } from '../../../layout/Layout';
+import LoginAPI from '../../../api/auth/LoginAPI';
+import {
+  accessTokenAtom,
+  csrfTokenAtom,
+  isLoginAtom,
+  userNameAtom,
+} from '../../../atom/Atom';
 
+// 로그인 페이지 컴포넌트
 function Login() {
-  const [userData, setUserData] = useState({
-    username: '',
-    password: ''
-  });
-  const [error, setError] = useState('');
+  const [userId, setUserId] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [isIdValid, setIsIdValid] = useState(null);
+  const [isPwValid, setIsPwValid] = useState(null);
 
-  const { username, password } = userData;
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenAtom);
+  const [csrfToken, setCsrfToken] = useRecoilState(csrfTokenAtom);
+  const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
+  const [userName, setUserName] = useRecoilState(userNameAtom);
 
-  const handleUsernameChange = (e) => {
-    setUserData({ ...userData, username: e.target.value });
-  };
+  const navigate = useNavigate();
 
-  const handlePasswordChange = (e) => {
-    setUserData({ ...userData, password: e.target.value });
-  };
+  // 아이디 유효성 검사
+  function idValidCheck(event) {
+    setUserId(event.target.value);
+  }
 
-  const handleLogin = async () => {
+  // 비밀번호 유효성 검사
+  function pwValidCheck(event) {
+    setUserPassword(event.target.value);
+    const testPassword = /^[A-Za-z0-9]{6,20}$/;
+    if (userPassword !== '' && userPassword.match(testPassword)) {
+      setIsPwValid(true);
+    } else {
+      setIsPwValid(false);
+    }
+  }
+
+  // 로그인 양식 제출 처리
+  const onHandleSubmit = async () => {
+    const data = {
+      username: userId,
+      password: userPassword,
+    };
     try {
-      const response = await axios.post('https://rest-recipe-book-dptb.run.goorm.site/members/login', userData);
-
-      // 로그인 성공 처리 메시지는 성공 but 로그인 아이디 비번 이 틀렸을 때 error처리됨
-      if (response.data.result === 'success') {
-        console.log('로그인 성공');
-      } else {
-        setError('아이디 또는 비밀번호가 올바르지 않습니다.');
-      }
-    } catch (error) {
-      // 오류 발생 시 처리
-      console.error('로그인 에러:', error);
-      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+      const res = await LoginAPI(data);
+      alert('어서오세요!');
+      setAccessToken(res.access_token);
+      setCsrfToken(res.csrf_token);
+      setUserName(res.username);
+      setIsLogin(true);
+      navigate('/');
+    } catch (err) {
+      console.log('아이디 비밀번호를 확인하세요.');
     }
   };
+
+  useEffect(() => {
+    // 이 부분에서 useEffect에 필요한 동작을 추가
+  }, []);
+
+  // 폼 제출 이벤트 핸들러
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onHandleSubmit();
+  };
+
   return (
-    <div className="page">
-      <div className="titleWrap">
-        아이디과 비밀번호를
-        <br/>
-        입력해주세요
-      </div>
-      <br/>
-
-      <div className="contentWrap">
-        <div className='inputTitle'>아이디</div>
-        <div className='inputWrap'>
-          <input className='input' type='text' value={username} onChange={handleUsernameChange} />
-        </div>
-        <div className='errorMessageWrap'>
-          {error && <span className="errorMessage">{error}</span>}
-        </div>
-
-        <div className='inputTitle'>비밀번호</div>
-        <div className='inputWrap'>
-          <input className='input' type="password" value={password} onChange={handlePasswordChange}/>
-        </div>
-        <div className='errorMessageWrap'></div>
-      </div>
-      <div>
-        <button onClick={handleLogin}>확인</button>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <Wrapper>
+        <Title>로그인</Title>
+        <Input
+          label='아이디'
+          type='text'
+          id='userId'
+          name='userId'
+          placeholder=''
+          value={userId}
+          onChange={idValidCheck}
+        />
+        <Input
+          label='비밀번호'
+          type='password'
+          id='userPw'
+          name='userPw'
+          placeholder=''
+          value={userPassword}
+          onChange={pwValidCheck}
+          isvalid={isPwValid}
+          errmsg='* 6자리 이상 입력하세요.'
+        />
+        <Button type='submit' content='로그인' style={{ marginTop: '50px' }} />
+        <Link
+          to={'/join'}
+          style={{
+            width: '100px',
+            height: '30px',
+            textDecoration: 'none',
+            textAlign: 'center',
+            marginTop: '30px',
+            color: 'inherit',
+          }}
+        >
+          회원가입
+        </Link>
+      </Wrapper>
+    </form>
   );
 }
+
+// 페이지 타이틀 스타일
+export const Title = styled.h2`
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: var(--main-color);
+  font-family: 'yg-jalnan';
+`;
+
+// 컨테이너 스타일
+const Wrapper = styled(LayoutWrapper)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default Login;

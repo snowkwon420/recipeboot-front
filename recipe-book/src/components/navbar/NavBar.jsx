@@ -1,17 +1,21 @@
-import React from "react";
+import { useRecoilValue } from 'recoil';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { isLoginAtom, userNameAtom } from '../../atom/Atom';
 
 // NavBar 컴포넌트
 function NavBar(props) {
+  const isLogin = useRecoilValue(isLoginAtom);
+  const userName = useRecoilValue(userNameAtom);
+
   return (
     <NavWrapper>
-      {props.isLogin ? (
+      {isLogin ? (
         <ul>
           <LeftLi>
-            <StyledLink to="/posts">Recipe</StyledLink>
+            <StyledLink to="/posts">Recipe List</StyledLink>
           </LeftLi>
-          <Profile>(아이디)</Profile>
+          <Profile>{userName}</Profile>
         </ul>
       ) : (
         <ul>

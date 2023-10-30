@@ -39,17 +39,17 @@ function PostList() {
       <HeadWrapper>
         {/* 레시피 등록 버튼 */}
         <Button
-          content="레시피 등록하기"
-          backgroundcolor="white"
-          color="Black"
-          border="1px var(--main-color)"
+          content='레시피 등록하기'
+          backgroundcolor='white'
+          color='black'
+          style={{ border: '3px solid black' }}
         />
         <InputContainer>
           {/* 검색 입력 필드 */}
-          <Input width="200px" />
+          <Input width='250px' style={{ padding: '0' }} />
           {/* 검색 아이콘 */}
           <SearchIcon
-            style={{ position: "absolute", right: "0px", top: "25px" }}
+            style={{ position: 'absolute', right: '0px', top: '30px', width: "20px", height: "20px" }}
           />
         </InputContainer>
       </HeadWrapper>
