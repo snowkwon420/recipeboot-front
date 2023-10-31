@@ -1,1 +1,1 @@
-export const URL = "https://rest-recipe-book-dptb.run.goorm.io";
+export const URL = "https://rest-recipe-book-dptb.run.goorm.site";

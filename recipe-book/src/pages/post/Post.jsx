@@ -12,29 +12,26 @@ import { useRecoilValue } from 'recoil';
 import PostCommentAPI from '../../api/posts/PostCommentAPI';
 
 function Post() {
-  // 게시물 데이터 및 관련 상태 변수 초기화
-  const [data, setData] = useState({ post: {} }); // 게시물 데이터
-  const [commentData, setCommentData] = useState([]); // 댓글 데이터
-  const [comment, setComment] = useState(''); // 댓글 입력 필드
-  const [newComment, setNewComment] = useState(''); // 새로운 댓글 입력 필드
+  // 상태 초기화
+  const [data, setData] = useState({ post: {} });
+  const [commentData, setCommentData] = useState([]);
+  const [comment, setComment] = useState('');
+  const [newComment, setNewComment] = useState('');
 
-  // 현재 경로 정보 가져오기
+  // 현재 URL에서 게시물 ID 추출
   const location = useLocation();
-
-  // 현재 게시물 ID 추출
   const postID = location.state.id;
 
-  // 게시물 상세 정보를 가져오기 위한 API 호출 함수
+  // 게시물 및 댓글 데이터 가져오는 API 함수 초기화
   const getPostDetail = PostDetailAPI(postID);
 
-  // Recoil을 통해 액세스 토큰 및 CSRF 토큰 가져오기
+  // Recoil 상태 사용
   const token = useRecoilValue(accessTokenAtom);
   const csrfToken = useRecoilValue(csrfTokenAtom);
+  
+  const postComment = PostCommentAPI(postID, token, csrfToken, newComment)
 
-  // 새로운 댓글을 게시하는 API 호출 함수
-  const postComment = PostCommentAPI(postID, token, csrfToken, newComment);
-
-  // 게시물 데이터와 댓글 데이터를 가져오는 함수
+  // 게시물 및 댓글 데이터 가져오기
   async function fetchData() {
     const res = await getPostDetail();
     setData(res.post);
@@ -42,19 +39,17 @@ function Post() {
     return res;
   }
 
-  // 컴포넌트가 로드될 때 게시물 데이터와 댓글 데이터 가져오기
   useEffect(() => {
+    // 컴포넌트 마운트 시 데이터 가져오기
     fetchData();
   }, []);
 
-  // 댓글 입력 값이 변경될 때 호출되는 함수
+  // 댓글 입력 핸들러
   const commentChange = (e) => {
     setNewComment(e.target.value);
   };
 
-  const time = dateTrance(data.create_date);
-
-  // 댓글 제출 처리 함수
+  // 댓글 제출 핸들러
   async function commentSubmitHandler(e) {
     e.preventDefault();
     await postComment();
@@ -63,63 +58,72 @@ function Post() {
     setCommentData(newRes.comments);
   }
 
-    return (
-      <>
-        <h2>{data.title}</h2>
-        <SectionWrapper>
-          {data.content}
-          <StyledLike>
-            <LikeIcon /> {data.like}
-          </StyledLike>
-          <StyledTime>{time}</StyledTime>
-        </SectionWrapper>
-        <StyledComment>comment : {commentData.length}</StyledComment>
-        <CommentInput>
-          <form onSubmit={commentSubmitHandler}>
-            <Input
-              width={'100%'}
-              onChange={commentChange}
-              type='text'
-              id='comment'
-              value={newComment}
-            />
-            <Button
-              type='submit'
-              height={'42px'}
-              width={'82px'}
-              content={'댓글 등록'}
-              backgroundcolor={'white'}
-              color={'var(--main-color)'}
-              style={{
-                position: 'absolute',
-                right: '0px',
-                top: '15px',
-                border: '1px solid var(--main-color)',
-              }}
-            />
-          </form>
-        </CommentInput>
-        <CommentSection>
-          {commentData.length > 0 ? (
-            commentData.map((comment, index) => (
-              <Comments key={index}>
-                <StyledId>
-                  {comment.username}
-                </StyledId>
-                <p>{comment.content}</p>
-                <StyledTime style={{ top: '5px', bottom: '0', fontSize: '10px' }}>
-                  {dateTrance(comment.create_date)}
-                </StyledTime>
-              </Comments>
-            ))
-          ) : (
-            <Loading />
-          )}
-        </CommentSection>
-      </>
-    );
+  // 게시물 작성일 변환 함수
+  const time = dateTrance(data.create_date);
+
+  return (
+    <>
+      <h2>{data.title}</h2>
+
+      <SectionWrapper>
+        {data.content}
+        <StyledLike>
+          <LikeIcon /> {data.like}
+        </StyledLike>
+        <StyledTime>{time}</StyledTime>
+      </SectionWrapper>
+
+      <StyledComment>comment : {commentData.length}</StyledComment>
+
+      <CommentInput>
+        <form onSubmit={commentSubmitHandler}>
+          <Input
+            width={'100%'}
+            onChange={commentChange}
+            type='text'
+            id='comment'
+            value={newComment}
+          />
+          <Button
+            type='submit'
+            height={'42px'}
+            width={'82px'}
+            content={'댓글 등록'}
+            backgroundcolor={'white'}
+            color={'var(--main-color)'}
+            style={{
+              position: 'absolute',
+              right: '0px',
+              top: '15px',
+              border: '1px solid var(--main-color)',
+            }}
+          />
+        </form>
+      </CommentInput>
+
+      <CommentSection>
+        {commentData.length > 0 ? (
+          commentData.map((comment, index) => (
+            <Comments key={index}>
+              <StyledId>
+                {/* 여기 username으로 변경 */}
+                {comment.user_id}
+              </StyledId>
+              <p>{comment.content}</p>
+              <StyledTime style={{ top: '5px', bottom: '0', fontSize: '10px' }}>
+                {dateTrance(comment.create_date)}
+              </StyledTime>
+            </Comments>
+          ))
+        ) : (
+          <Loading />
+        )}
+      </CommentSection>
+    </>
+  );
 }
 
+// 컴포넌트 스타일 관련 정의
 const CommentInput = styled.div`
   position: relative;
 `;
@@ -129,7 +133,7 @@ const StyledId = styled.div`
   margin-bottom: 2px;
 `;
 
-const SectionWrapper = styled.section`
+export const SectionWrapper = styled.section`
   position: relative;
   width: 100%;
   min-height: 220px;
@@ -140,7 +144,6 @@ const SectionWrapper = styled.section`
 const CommentSection = styled.section``;
 
 const Comments = styled.div`
-  /* box-shadow: inset 0 0 10px red; */
   position: relative;
   width: 100%;
   height: 40px;

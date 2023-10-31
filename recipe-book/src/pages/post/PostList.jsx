@@ -9,6 +9,9 @@ import Paging from "../../components/paging/Paging";
 import PostListContent from "./PostListContent";
 import PostListAPI from "../../api/posts/PostListAPI";
 import Loading from "../loading/Loading";
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { isLoginAtom } from '../../atom/Atom';
 
 function PostList() {
   // 상태 변수 초기화
@@ -16,6 +19,16 @@ function PostList() {
   const [data, setData] = useState({ posts: [] });
   const [totalDataLength, setTotalDataLength] = useState(0);
   const getPostList = PostListAPI(page);
+  const navigate = useNavigate();
+  const isLogin = useRecoilValue(isLoginAtom);
+
+  const formButton = () => {
+    if (isLogin) {
+      navigate('/posts/form');
+    } else if (!isLogin) {
+      navigate('/login');
+    }
+  };
 
   // 데이터 가져오는 함수
   const postData = async () => {
@@ -39,6 +52,7 @@ function PostList() {
       <HeadWrapper>
         {/* 레시피 등록 버튼 */}
         <Button
+          onClick={formButton}
           content='레시피 등록하기'
           backgroundcolor='white'
           color='black'
