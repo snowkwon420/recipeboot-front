@@ -190,7 +190,7 @@ const [isLogin, setIsLogin] = useRecoilState(isLoginAtom);
 ```
 
 - 본 프로젝트에서는 사용자의 로그인 상태, 액세스 & CSRF 토큰의 상태 등을 Recoil로 상태 관리함
-- 쉬운 문법으로 컴포넌트 간 데이터 공유를 할 수 있어 선택함
+- 쉬운 문법으로 컴포넌트 간 데이터 공유를 할 수 있어 선택함
 
 ### 3.2. Styled Components
 
