@@ -22,7 +22,7 @@ const PostCommentAPI = (id, accesstoken, csrfToken, comment) => {
       console.log(data);
       return data;
     } catch (error) {
-      console.error('Post Comment 데이터 전송 실패', error); // 오류 발생 시 오류 메시지 출력
+        console.error('Post Comment 데이터 전송 실패', error); // 오류 발생 시 오류 메시지 출력
     }
   };
 
