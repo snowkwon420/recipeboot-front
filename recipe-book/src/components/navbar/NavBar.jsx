@@ -48,7 +48,7 @@ function NavBar(props) {
         // 사용자가 로그인하지 않은 경우
         <ul>
           <LeftLi>
-            <StyledLink to='/posts'>Recipe</StyledLink>
+            <StyledLink to='/posts'>Recipe List</StyledLink>
           </LeftLi>
           <RightLi>
             <StyledLink to='/login'>Login</StyledLink>
@@ -73,7 +73,7 @@ const NavWrapper = styled.nav`
   height: 36px;
   background-color: var(--main-color);
   font-size: 24px;
-  font-family: "IBMPlexSansKR";
+  font-family: "NPSfontBold";
   padding: 8px 0px;
   line-height: 36px;
   ul {

@@ -5,7 +5,7 @@ import '../assets/font.css';
 const GlobalStyle = createGlobalStyle`
   // 변수 정의: 주요 색상 설정
   :root {
-    --main-color: #ff7028;
+    --main-color: #FF7043;
   }
 
   // HTML 및 body 요소에 대한 기본 스타일 설정

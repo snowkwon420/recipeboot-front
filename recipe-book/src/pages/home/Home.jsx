@@ -1,5 +1,5 @@
 import React from 'react';
-import homeImg from '../../assets/img/index.jpg';
+import homeImg from '../../assets/img/index.png';
 
 // Home 컴포넌트 정의
 function Home() {
@@ -22,7 +22,7 @@ const imgStyle = {
 const titleStyle = {
   fontFamily: 'yg-jalnan', // 폰트 "yg-jalnan" 사용
   fontSize: '3em', // 폰트 크기 3em
-  color: '#ff7028', // 글자색 오렌지
+  color: '#FF7043', // 글자색 오렌지
   textAlign: 'center', // 텍스트 중앙 정렬
   marginTop: '30px', // 위쪽 여백 30px
 };
