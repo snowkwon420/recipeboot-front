@@ -29,7 +29,6 @@ jobs:
 
       - name: Build react app
         run: |
-          npm audit fix --force
           npm install
           npm run build
 
