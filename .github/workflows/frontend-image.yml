@@ -1,0 +1,33 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build application
+      run: npm run build
+
+    - name: Login to ECR
+      run: echo ${{ secrets.AWS_ACCESS_KEY_ID }} | docker login -u AWS --password-stdin ${{ secrets.AWS_REGISTRY_URL }}
+
+    - name: Build and push Docker image to ECR
+      run: |
+        docker build -t ${{ secrets.AWS_REGISTRY_URL }}/your-image-name:${{ github.sha }} .
+        docker push ${{ secrets.AWS_REGISTRY_URL }}/your-image-name:${{ github.sha }}
