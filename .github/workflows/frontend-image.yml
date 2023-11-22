@@ -29,6 +29,7 @@ jobs:
 
       - name: Build react app
         run: |
+          npm audit fix
           npm install
           npm run build
 
