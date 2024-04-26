@@ -7,17 +7,9 @@
 
 - 배승원 (https://github.com/seungwonbased)
 	- Team Leader
-	- Frontend Dev
-- 서종훈 (https://github.com/seojonghon)
-	- Frontend Dev
-- 이지윤 (https://github.com/jiiiyunn)
-	- Frontend Dev
-- 정지환 (https://github.com/hwan515)
-	- Frontend Dev
-- 이진욱 (https://github.com/dljinook)
-	- Frontend Dev
-- 김지훈
-	- Project Manager
+	- Backend Develop
+- 권순호 (https://github.com/snowkwon420)
+ 	- Frontend Develop
 
 ### 1.2. 팀 문화: 조금 더 개발자스러운 Workflow, 커뮤니케이션
 #### 1.2.1. Git, GitHub를 이용한 협업
